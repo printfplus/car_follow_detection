@@ -14,6 +14,8 @@ global dt;
 dt = 1;
 global STEP;
 STEP = 20;
+global omega;
+omega = 10;
 amin = -3;
 amax = 3;
 vmax = 40;
@@ -39,6 +41,7 @@ problem = createOptimProblem('fmincon','x0',x0,'objective',handle,...
 gs = GlobalSearch;
 xgs = run(gs,problem);
 accelerationplot(xgs);
+accelerationplot(-3*ones(1,STEP));
 
 now_val = my_fitness(xgs);
 newf_val = my_fitness(-3*ones(1,STEP));

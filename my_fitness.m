@@ -19,7 +19,7 @@ x1t = x0;
 x2t = lastx;
 v2t = lastv;
 a2 = pid_follow(x0,lastx,v0,lastv);
-f = time_interval(x1t,x2t,v1t,v2t);
+f = time_interval(x1t,x2t,v1t,v2t,0);
 
 for i = 1:STEP
     x1t = x1t + v1t*dt + 0.5*x(i)*dt*dt;
@@ -38,12 +38,12 @@ for i = 1:STEP
     v2t = v2t + a2*dt;
     
     a2 = pid_follow(x1t,x2t,v1t,v2t);
-    ttc = time_interval(x1t,x2t,v1t,v2t);
+    ttc = time_interval(x1t,x2t,v1t,v2t,x(i));
     
-    f = f+ttc;
-    %if f > ttc+10*i
-    %    f = ttc+10*i;
-    %end
+    %f = f+ttc;
+    if f > ttc%+10*i
+        f = ttc;%+10*i;
+    end
 
 end
 %f = f;%+100*max(abs(diff(x)));

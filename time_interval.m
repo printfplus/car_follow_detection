@@ -1,19 +1,11 @@
-function f = time_interval( x1,x2,v1,v2)
-
+function f = time_interval( x1,x2,v1,v2,a)
+global omega;
 if x1 > x2
     f = -(v2-v1)/(x1-x2);
-    %f = x1-x2;
-    %f = (x1-x2)/(v2-v1);
-    %if f < -1000
-    %    f = -1000;
-    %end
-%    end
-%else
-%    f = -65526;
-%end
 else
-    f = -2000;
+    f = -100000;
 end
-
+if a<-2 || a>2
+    f = f+ omega*min(abs(a+2),abs(a-2));
 end
 
