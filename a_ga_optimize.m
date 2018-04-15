@@ -1,7 +1,5 @@
 clear;
 %clc;
-sixmin = @(x)(4*x(1)^2 - 2.1*x(1)^4 + x(1)^6/3 ...
-    + x(1)*x(2) - 4*x(2)^2 + 4*x(2)^4);
 
 global x1;
 global x2;
@@ -22,8 +20,7 @@ vmax = 40;
 vmin = 0;
 nvars = STEP;
 v0 = 25;
-%x0 = 100;
-%x0 = amin+(amax-amin)*rand(STEP,1);
+
 x0 = ones(1,STEP);
 A = tril(ones(STEP,STEP),0);
 ObjectiveFunction = @my_fitness;
@@ -36,9 +33,6 @@ b = (v0-vmin)*ones(STEP,1);
 A = [A;-1*a];
 B = [B;b];
 
-%[x,fval] = ga(ObjectiveFunction,nvars,A,B,[],[],LB,UB);
-
-%accelerationplot(x);\
 handle = @my_fitness;
 problem = createOptimProblem('fmincon','x0',x0,'objective',handle,...
     'lb',LB,'ub',UB,'Aineq',A,'bineq', B, 'Aeq',[], 'beq',[],'options',optimset('Algorithm','SQP','Disp','none'));
